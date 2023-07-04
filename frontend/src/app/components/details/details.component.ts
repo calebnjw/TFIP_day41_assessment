@@ -26,12 +26,18 @@ export class DetailsComponent implements OnInit {
     this.bookService
       .findOne(this.book_id)
       .then((res) => {
-        console.log('RESULT: ', res);
         this.book = res;
-        console.log('BOOK!', this.book);
       })
       .catch((error) => {
         console.log(error.message);
       });
+  }
+
+  goBack() {
+    this.router.navigate(['/search/', this.book.title.substring(0, 1)]);
+  }
+
+  findReviews(title: string) {
+    this.router.navigate(['/reviews/', this.book_id]);
   }
 }

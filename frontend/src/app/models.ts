@@ -5,7 +5,7 @@ export interface Book {
   description: string;
   pages: number;
   rating: number;
-  ratingCount: number;
+  rating_count: number;
   genre: string;
   image_url: string;
 }

@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: 'search/:character', component: ListComponent },
   { path: 'book/:book_id', component: DetailsComponent },
-  { path: 'book/:book_id/review', component: ReviewComponent },
+  { path: 'reviews/:book_id', component: ReviewComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 

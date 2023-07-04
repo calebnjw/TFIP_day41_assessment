@@ -1,9 +1,18 @@
+<button type="button" (click)="goBack()">Back</button>
 <div class="left-col">
   <img src="{{ book.image_url }}" alt="Book cover" />
   <div>
     <p>Pages: {{ book.pages }}</p>
-    <p>Rating: {{ book.rating }}</p>
+    <p>
+      Rating: {{ book.rating.toFixed(2) }} by {{ book.rating_count }} people
+    </p>
     <p>Genres: {{ book.genre }}</p>
   </div>
 </div>
-<div></div>
+<div>
+  <h1>{{ book.title }}</h1>
+  <h4>by {{ book.authors.slice(1, -1) }}</h4>
+  <p>{{ book.description }}</p>
+  <br />
+  <a (click)="findReviews(book.title)">Find reviews</a>
+</div>

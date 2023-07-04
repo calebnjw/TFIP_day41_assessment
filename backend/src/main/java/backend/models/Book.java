@@ -1,5 +1,6 @@
 package backend.models;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -15,7 +16,7 @@ public class Book {
   private Integer pages;
   private Float rating;
   private Integer rating_count;
-  private String genres;
+  private List<String> genres;
   private String image_url;
 
   public Book() {
@@ -27,7 +28,7 @@ public class Book {
   }
 
   public Book(String book_id, String title, List<String> authors, String description, Integer pages, Float rating,
-      Integer rating_count, String genres, String image_url) {
+      Integer rating_count, List<String> genres, String image_url) {
     this.book_id = book_id;
     this.title = title;
     this.authors = authors;
@@ -95,11 +96,11 @@ public class Book {
     this.rating_count = rating_count;
   }
 
-  public String getGenres() {
+  public List<String> getGenres() {
     return genres;
   }
 
-  public void setGenres(String genres) {
+  public void setGenres(List<String> genres) {
     this.genres = genres;
   }
 
@@ -115,7 +116,7 @@ public class Book {
   public String toString() {
     return "Book [book_id=" + book_id + ", title=" + title + ", authors=" + authors + ", description=" + description
         + ", pages="
-        + pages + ", rating=" + rating + ", ratingCount=" + rating_count + ", genres=" + genres + ", image_url="
+        + pages + ", rating=" + rating + ", rating_count=" + rating_count + ", genres=" + genres + ", image_url="
         + image_url
         + "]";
   }
@@ -130,19 +131,24 @@ public class Book {
   }
 
   public static Book createFull(SqlRowSet rs) {
+    System.out.println("CREATING FULL BOOK!");
     Book book = new Book();
 
     String authorString = rs.getString("authors");
-    System.out.println(authorString);
+    List<String> authors = Arrays.asList(authorString.split("\\|"));
+    System.out.println(authors);
+
+    String genresString = rs.getString("genres");
+    List<String> genres = Arrays.asList(genresString.split("\\|"));
 
     book.setBookId(rs.getString("book_id"));
     book.setTitle(rs.getString("title"));
-    // book.setAuthors(rs.getString("authors"));
+    book.setAuthors(authors);
     book.setDescription(rs.getString("description"));
     book.setPages(rs.getInt("pages"));
     book.setRating(rs.getFloat("rating"));
     book.setRatingCount(rs.getInt("rating_count"));
-    book.setGenres(rs.getString("genres"));
+    book.setGenres(genres);
     book.setImageURL(rs.getString("image_url"));
 
     return book;
@@ -164,9 +170,8 @@ public class Book {
         .add("pages", getPages())
         .add("rating", getRating())
         .add("rating_count", getRatingCount())
-        .add("genres", getGenres())
+        .add("genres", getGenres().toString())
         .add("image_url", getImageURL())
         .build();
   }
-
 }

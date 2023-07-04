@@ -37,16 +37,17 @@ public class BookRepository {
   }
 
   public Book getOneBook(String book_id) {
-    Book book = new Book();
+    List<Book> books = new ArrayList<Book>();
 
     SqlRowSet rs = jdbcTemplate.queryForRowSet(SELECT_BOOK, book_id);
+    System.out.println("RESULTS!" + rs.toString());
+
     while (rs.next()) {
-      System.out.println("RESULTS!" + rs.toString());
       // System.out.println(rs.next());
-      Book.createFull(rs);
+      books.add(Book.createFull(rs));
     }
 
-    System.out.println(book);
-    return book;
+    System.out.println(books.get(0));
+    return books.get(0);
   }
 }
