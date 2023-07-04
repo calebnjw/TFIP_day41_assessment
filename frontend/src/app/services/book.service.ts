@@ -12,13 +12,19 @@ export class BookService {
     };
 
     return firstValueFrom(
-      this.http.post<any>('http://localhost:8080/api/books/search', requestBody)
+      this.http.post<any>(
+        'https://day41assessment-production.up.railway.app/api/books/search',
+        requestBody
+      )
     );
   }
 
   findOne(book_id: string) {
     return firstValueFrom(
-      this.http.get<any>('http://localhost:8080/api/books/get/' + book_id)
+      this.http.get<any>(
+        'https://day41assessment-production.up.railway.app/api/books/get/' +
+          book_id
+      )
     );
   }
 }

@@ -72,6 +72,6 @@ export class ListComponent implements OnInit {
   }
 
   goToBook(book_id: string) {
-    this.router.navigate(['book', book_id]);
+    this.router.navigate(['/book/', book_id]);
   }
 }

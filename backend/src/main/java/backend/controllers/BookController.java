@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Book;
 import backend.models.SearchParameters;
 import backend.repositories.BookRepository;
-import backend.services.ReviewService;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
@@ -67,19 +67,21 @@ public class BookController {
         .body(result.toString());
   }
 
-  @GetMapping(path = "/reviews/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/reviews/{book_id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public ResponseEntity<String> getReviews(@PathVariable String title) {
-    ReviewService.getReviews
+  public ResponseEntity<String> getReviews(@PathVariable String book_id, @RequestParam String title) {
+    // ReviewResponse response = ReviewService.getReviews(title);
 
-    JsonObject result = Json.createObjectBuilder()
-        .add("title", book.getTitle())
-        .add("authors", book.getAuthors().toString())
-        .build();
+    // JsonObject result = Json.createObjectBuilder()
+    // .add("title", book.getTitle())
+    // .add("authors", book.getAuthors().toString())
+    // .build();
 
-    return ResponseEntity.status(HttpStatus.ACCEPTED)
-        .contentType(MediaType.APPLICATION_JSON)
-        .body(result.toString());
+    // return ResponseEntity.status(HttpStatus.ACCEPTED)
+    // .contentType(MediaType.APPLICATION_JSON)
+    // .body(result.toString());
+
+    return null;
   }
 
 }
