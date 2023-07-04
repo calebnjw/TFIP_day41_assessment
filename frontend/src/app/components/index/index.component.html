@@ -4,7 +4,7 @@
     class="character-button"
     type="button"
     *ngFor="let letter of LETTERS"
-    (click)="goToLetter(letter)"
+    (click)="searchFor(letter)"
   >
     {{ letter }}
   </button>
@@ -14,7 +14,7 @@
     class="character-button"
     type="button"
     *ngFor="let number of NUMBERS"
-    (click)="goToLetter(number)"
+    (click)="searchFor(number)"
   >
     {{ number }}
   </button>

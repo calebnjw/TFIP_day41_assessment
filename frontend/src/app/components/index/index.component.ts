@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, UrlCreationOptions } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -40,7 +40,7 @@ export class IndexComponent {
 
   NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-  goToLetter(letter: String) {
+  searchFor(letter: String) {
     this.router.navigate(['/search/', letter]);
   }
 }

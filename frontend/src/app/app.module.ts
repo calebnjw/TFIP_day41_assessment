@@ -8,11 +8,14 @@ import { IndexComponent } from './components/index/index.component';
 import { ListComponent } from './components/list/list.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ReviewComponent } from './components/review/review.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent, title: 'Book Reviews' },
   { path: 'index', component: IndexComponent },
   { path: 'search/:character', component: ListComponent },
+  { path: 'book/:book_id', component: DetailsComponent },
+  { path: 'book/:book_id/review', component: ReviewComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
@@ -26,6 +29,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
   ],
