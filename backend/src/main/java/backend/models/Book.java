@@ -14,8 +14,8 @@ public class Book {
   private String description;
   private Integer pages;
   private Float rating;
-  private Integer ratingCount;
-  private String genre;
+  private Integer rating_count;
+  private String genres;
   private String image_url;
 
   public Book() {
@@ -27,15 +27,15 @@ public class Book {
   }
 
   public Book(String book_id, String title, List<String> authors, String description, Integer pages, Float rating,
-      Integer ratingCount, String genre, String image_url) {
+      Integer rating_count, String genres, String image_url) {
     this.book_id = book_id;
     this.title = title;
     this.authors = authors;
     this.description = description;
     this.pages = pages;
     this.rating = rating;
-    this.ratingCount = ratingCount;
-    this.genre = genre;
+    this.rating_count = rating_count;
+    this.genres = genres;
     this.image_url = image_url;
   }
 
@@ -88,19 +88,19 @@ public class Book {
   }
 
   public Integer getRatingCount() {
-    return ratingCount;
+    return rating_count;
   }
 
-  public void setRatingCount(Integer ratingCount) {
-    this.ratingCount = ratingCount;
+  public void setRatingCount(Integer rating_count) {
+    this.rating_count = rating_count;
   }
 
-  public String getGenre() {
-    return genre;
+  public String getGenres() {
+    return genres;
   }
 
-  public void setGenre(String genre) {
-    this.genre = genre;
+  public void setGenres(String genres) {
+    this.genres = genres;
   }
 
   public String getImageURL() {
@@ -115,7 +115,7 @@ public class Book {
   public String toString() {
     return "Book [book_id=" + book_id + ", title=" + title + ", authors=" + authors + ", description=" + description
         + ", pages="
-        + pages + ", rating=" + rating + ", ratingCount=" + ratingCount + ", genre=" + genre + ", image_url="
+        + pages + ", rating=" + rating + ", ratingCount=" + rating_count + ", genres=" + genres + ", image_url="
         + image_url
         + "]";
   }
@@ -136,13 +136,13 @@ public class Book {
     System.out.println(authorString);
 
     book.setBookId(rs.getString("book_id"));
-    book.setTitle(rs.getString("company"));
+    book.setTitle(rs.getString("title"));
     // book.setAuthors(rs.getString("authors"));
     book.setDescription(rs.getString("description"));
     book.setPages(rs.getInt("pages"));
     book.setRating(rs.getFloat("rating"));
     book.setRatingCount(rs.getInt("rating_count"));
-    book.setGenre(rs.getString("genre"));
+    book.setGenres(rs.getString("genres"));
     book.setImageURL(rs.getString("image_url"));
 
     return book;
@@ -150,22 +150,22 @@ public class Book {
 
   public JsonValue toSimpleJson() {
     return Json.createObjectBuilder()
-        .add("id", getBookId())
+        .add("book_id", getBookId())
         .add("title", getTitle())
         .build();
   }
 
   public JsonValue toJson() {
     return Json.createObjectBuilder()
-        .add("id", getBookId())
+        .add("book_id", getBookId())
         .add("title", getTitle())
         .add("authors", getAuthors().toString())
         .add("description", getDescription())
         .add("pages", getPages())
         .add("rating", getRating())
-        .add("ratingCount", getRatingCount())
-        .add("genre", getGenre())
-        .add("coverURL", getImageURL())
+        .add("rating_count", getRatingCount())
+        .add("genres", getGenres())
+        .add("image_url", getImageURL())
         .build();
   }
 

@@ -7,9 +7,6 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   searchFor(character: string, page: number) {
-    console.log('CHARACTER: ', character);
-    console.log('PAGE: ', page);
-
     const requestBody = {
       character,
       page,
@@ -17,6 +14,12 @@ export class BookService {
 
     return firstValueFrom(
       this.http.post<any>('http://localhost:8080/api/books/search', requestBody)
+    );
+  }
+
+  findOne(book_id: string) {
+    return firstValueFrom(
+      this.http.get<any>('http://localhost:8080/api/books/get/' + book_id)
     );
   }
 }

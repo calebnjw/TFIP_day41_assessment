@@ -20,7 +20,7 @@ public class BookRepository {
 
   public static final String SELECT_ALL_BOOKS = "SELECT book_id, title FROM book2018 WHERE title LIKE ? ORDER BY title";
 
-  public static final String SELECT_BOOK = "SELECT book_id, title, authors, description, pages, rating, rating_count, genres, image_url AS coverURL FROM book2018 WHERE book_id = ?";
+  public static final String SELECT_BOOK = "SELECT * FROM book2018 WHERE book_id = ?";
 
   public List<Book> getAllBooks(SearchParameters searchParameters) {
     String character = searchParameters.getCharacter() + "%";
@@ -34,5 +34,19 @@ public class BookRepository {
 
     System.out.println(books);
     return books;
+  }
+
+  public Book getOneBook(String book_id) {
+    Book book = new Book();
+
+    SqlRowSet rs = jdbcTemplate.queryForRowSet(SELECT_BOOK, book_id);
+    while (rs.next()) {
+      System.out.println("RESULTS!" + rs.toString());
+      // System.out.println(rs.next());
+      Book.createFull(rs);
+    }
+
+    System.out.println(book);
+    return book;
   }
 }

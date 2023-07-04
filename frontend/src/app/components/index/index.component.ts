@@ -41,6 +41,6 @@ export class IndexComponent {
   NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   searchFor(letter: String) {
-    this.router.navigate(['/search/', letter]);
+    this.router.navigate(['search/', letter]);
   }
 }

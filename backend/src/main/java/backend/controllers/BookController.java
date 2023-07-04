@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonValue;
 
 @RestController
 @RequestMapping(path = "/api/books")
@@ -45,6 +48,18 @@ public class BookController {
       arrayBuilder.add(b.toSimpleJson());
     }
     JsonArray result = arrayBuilder.build();
+
+    return ResponseEntity.status(HttpStatus.ACCEPTED)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(result.toString());
+  }
+
+  @GetMapping(path = "/get/{book_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
+  public ResponseEntity<String> getBook(@PathVariable String book_id) {
+    Book book = this.bookRepository.getOneBook(book_id);
+
+    JsonValue result = book.toJson();
 
     return ResponseEntity.status(HttpStatus.ACCEPTED)
         .contentType(MediaType.APPLICATION_JSON)

@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { book } from 'src/app/models';
+import { Book } from 'src/app/models';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -23,20 +23,21 @@ export class ListComponent implements OnInit {
   hasPrevious: boolean = false;
   hasNext: boolean = false;
 
-  books!: book[];
-  booksDisplay!: book[];
+  books!: Book[];
+  booksDisplay!: Book[];
 
   ngOnInit(): void {
     this.character = this.activatedRoute.snapshot.params['character'];
     // this.page = this.activatedRoute.snapshot.queryParams['page'];
+
+    console.log('CHARACTER: ', this.character);
+    console.log('PAGE: ', this.page);
 
     this.bookService
       .searchFor(this.character, this.page)
       .then((res) => {
         this.books = res;
         this.booksDisplay = res.slice(this.startIndex, this.endIndex);
-
-        console.log(this.booksDisplay);
 
         if (this.books.length > 10) {
           this.hasNext = true;
@@ -68,5 +69,9 @@ export class ListComponent implements OnInit {
     if (this.page * 10 > this.books.length) {
       this.hasNext = true;
     }
+  }
+
+  goToBook(book_id: string) {
+    this.router.navigate(['book', book_id]);
   }
 }

@@ -4,7 +4,7 @@
 </div>
 <div>
   <p *ngFor="let book of booksDisplay">
-    <a href="/book/{{ book.book_id }}">{{ book.title }}</a>
+    <a (click)="goToBook(book.book_id)">{{ book.title }}</a>
   </p>
 </div>
 <div>
