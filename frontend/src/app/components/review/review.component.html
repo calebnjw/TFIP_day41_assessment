@@ -3,7 +3,11 @@
   <h4>by {{ reviews.results[0].book_author }}</h4>
 
   <div>
-    <div *ngFor="let review of reviews.results"></div>
+    <div *ngFor="let review of reviews.results">
+      <p>Reviewer: {{ review.byline }}</p>
+      <p>Date: {{ review.publication_dt }}</p>
+      <p>{{ review.summary }}</p>
+    </div>
   </div>
 </div>
 
