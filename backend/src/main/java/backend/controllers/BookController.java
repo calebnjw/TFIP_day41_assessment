@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import backend.models.Book;
 import backend.models.SearchParameters;
 import backend.repositories.BookRepository;
+import backend.services.ReviewService;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
@@ -60,6 +61,21 @@ public class BookController {
     Book book = this.bookRepository.getOneBook(book_id);
 
     JsonValue result = book.toJson();
+
+    return ResponseEntity.status(HttpStatus.ACCEPTED)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(result.toString());
+  }
+
+  @GetMapping(path = "/reviews/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
+  public ResponseEntity<String> getReviews(@PathVariable String title) {
+    ReviewService.getReviews
+
+    JsonObject result = Json.createObjectBuilder()
+        .add("title", book.getTitle())
+        .add("authors", book.getAuthors().toString())
+        .build();
 
     return ResponseEntity.status(HttpStatus.ACCEPTED)
         .contentType(MediaType.APPLICATION_JSON)

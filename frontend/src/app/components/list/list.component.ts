@@ -34,7 +34,7 @@ export class ListComponent implements OnInit {
     console.log('PAGE: ', this.page);
 
     this.bookService
-      .searchFor(this.character, this.page)
+      .searchFor(this.character)
       .then((res) => {
         this.books = res;
         this.booksDisplay = res.slice(this.startIndex, this.endIndex);

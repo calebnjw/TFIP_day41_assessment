@@ -38,6 +38,8 @@ export class DetailsComponent implements OnInit {
   }
 
   findReviews(title: string) {
-    this.router.navigate(['/reviews/', this.book_id]);
+    this.router.navigate(['/reviews/', this.book_id], {
+      queryParams: { title: this.book.title },
+    });
   }
 }

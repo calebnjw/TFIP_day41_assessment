@@ -6,10 +6,9 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 export class BookService {
   constructor(private http: HttpClient) {}
 
-  searchFor(character: string, page: number) {
+  searchFor(character: string) {
     const requestBody = {
       character,
-      page,
     };
 
     return firstValueFrom(

@@ -9,6 +9,8 @@ import { ListComponent } from './components/list/list.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ReviewComponent } from './components/review/review.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BookDirective } from './directives/book.directive';
+import { ListDirective } from './directives/list.directive';
 
 const appRoutes: Routes = [
   { path: '', component: IndexComponent, title: 'Book Reviews' },
@@ -26,6 +28,8 @@ const appRoutes: Routes = [
     ListComponent,
     DetailsComponent,
     ReviewComponent,
+    BookDirective,
+    ListDirective,
   ],
   imports: [
     BrowserModule,
