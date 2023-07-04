@@ -1,0 +1,21 @@
+<h1>My Bookstore</h1>
+<div>
+  <button
+    class="character-button"
+    type="button"
+    *ngFor="let letter of LETTERS"
+    (click)="goToLetter(letter)"
+  >
+    {{ letter }}
+  </button>
+</div>
+<div>
+  <button
+    class="character-button"
+    type="button"
+    *ngFor="let number of NUMBERS"
+    (click)="goToLetter(number)"
+  >
+    {{ number }}
+  </button>
+</div>

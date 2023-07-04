@@ -1,0 +1,18 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.character-button {
+  height: auto;
+  width: 3em;
+
+  font-weight: bold;
+
+  margin: 0.5em;
+}
