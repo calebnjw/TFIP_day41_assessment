@@ -13,7 +13,8 @@ export class BookService {
 
     return firstValueFrom(
       this.http.post<any>(
-        'https://day41assessment-production.up.railway.app/api/books/search',
+        // 'https://day41assessment-production.up.railway.app/api/books/search',
+        'http://localhost:8080/api/books/search',
         requestBody
       )
     );
@@ -22,8 +23,8 @@ export class BookService {
   findOne(book_id: string) {
     return firstValueFrom(
       this.http.get<any>(
-        'https://day41assessment-production.up.railway.app/api/books/get/' +
-          book_id
+        // 'https://day41assessment-production.up.railway.app/api/books/get/' +
+        'http://localhost:8080/api/books/get/' + book_id
       )
     );
   }

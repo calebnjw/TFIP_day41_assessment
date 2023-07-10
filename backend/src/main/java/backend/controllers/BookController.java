@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.models.Book;
+import backend.models.ReviewResponse;
 import backend.models.SearchParameters;
 import backend.repositories.BookRepository;
+import backend.services.ReviewService;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
@@ -34,10 +36,15 @@ public class BookController {
   @Autowired
   public BookRepository bookRepository;
 
+  @Autowired
+  public ReviewService reviewService;
+
   @PostMapping(path = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
   public ResponseEntity<String> findBooks(@RequestBody String jsonBody) {
     SearchParameters searchParameters = new SearchParameters();
+
+    System.out.println("HELLO, SEARCHING.");
 
     JsonObject o = Json.createReader(new StringReader(jsonBody)).readObject();
     searchParameters.setCharacter(o.getString("character"));
@@ -67,21 +74,24 @@ public class BookController {
         .body(result.toString());
   }
 
-  @GetMapping(path = "/reviews/{book_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/reviews/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public ResponseEntity<String> getReviews(@PathVariable String book_id, @RequestParam String title) {
-    // ReviewResponse response = ReviewService.getReviews(title);
+  public ResponseEntity<String> getReviews(@PathVariable String title) throws IOException {
+    System.out.println("GETTING REVIEWS FOR BOOK: " + title);
 
-    // JsonObject result = Json.createObjectBuilder()
-    // .add("title", book.getTitle())
-    // .add("authors", book.getAuthors().toString())
-    // .build();
+    ReviewResponse reviewResponse = reviewService.getReviews(title);
 
-    // return ResponseEntity.status(HttpStatus.ACCEPTED)
-    // .contentType(MediaType.APPLICATION_JSON)
-    // .body(result.toString());
+    if (reviewResponse.getNum_results() <= 0) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(null);
+    }
 
-    return null;
+    JsonValue result = reviewResponse.toJson();
+
+    return ResponseEntity.status(HttpStatus.ACCEPTED)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(result.toString());
   }
 
 }

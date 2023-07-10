@@ -11,8 +11,6 @@ export interface Book {
 }
 
 export interface ReviewResponse {
-  status: string;
-  copyright: string;
   num_results: number;
   results: Reviews[];
 }
